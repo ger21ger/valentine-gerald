@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Be My Valentine ❤️</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+    body {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 40px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      max-width: 420px;
+      width: 90%;
+      animation: fadeIn 1s ease;
+    }
+
+    h1 { font-size: 26px; color: #ff4d6d; margin-bottom: 20px; }
+    p { color: #555; margin-bottom: 20px; }
+
+    .buttons { display: flex; justify-content: center; gap: 15px; position: relative; }
+
+    button {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 999px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    #yesBtn { background: #ff4d6d; color: white; }
+    #yesBtn:hover { transform: scale(1.1); background: #ff3355; }
+
+    #noBtn { background: #ddd; color: #333; position: absolute; }
+
+    .hidden { display: none; }
+
+    .heart {
+      position: absolute;
+      font-size: 20px;
+      animation: float 4s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes float {
+      from { transform: translateY(100vh) scale(1); opacity: 1; }
+      to { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Halaman 1 -->
+  <div class="card" id="card">
+    <h1>Renata, mau jadi Valentine-nya Gerald? ❤️</h1>
+    <p>Pilih jawaban yang paling jujur yaa 😆</p>
+    <div class="buttons">
+      <button id="yesBtn">Yes 💖</button>
+      <button id="noBtn">No 😢</button>
+    </div>
+  </div>
+
+  <!-- Halaman 2 -->
+  <div class="card hidden" id="success">
+    <h1>Yayyy! 💕</h1>
+    <p>Sekarang Renata resmi jadi Valentine-nya Gerald 🥰</p>
+  </div>
+
+  <!-- Halaman 3 Pesan Cinta -->
+  <div class="card hidden" id="loveMessage">
+    <h1>Untuk Renata 💌</h1>
+    <p style="text-align:left; line-height:1.6">
+      haii sayanggkuu selamat hari valentine yaaa, maaf banget aku cuman bisa ngasih ini di hari valentine pertama kita, tapi aku udah siapin hadiahnya nanti cuman aku baru bisa ngasih hadiahnya waktu nanti kita ketemu, maaff yaaa sayangg kalau nanti hadiahnya kecil dan simple karna aku baru bisa kasih ituu, ohh iyaa thank youu sayanggg udah milih aku gaa kerasa dari awal tahun ini kita udah bareng lalu hari ini hari valentine gaa kerasa yaaa cepet bangett walau banyak sekali rintangan2 yg kemarin kita lewatin tapi akuu seneng banget bisa bertemu dengan kamu yg cantikk sekalii sayanggg🫶🏻🫶🏻, akuu harap kita selalu kompak terus yaa kedepannya jika kamu ada yg gaa kamu suka dari aku ngomong yaa sayangg atau gaa kamu omelin aja aku sayangg, begitupun sebaliknya jugaa, selalu inget aku yaa sayanggg waktu kamu sibuk karna akuu khawatir kalau kamu ga ada kabar sayanggg, dan juga jangan bikin aku cemburu yaa sayanggg kalau ada cowo yg caper ke kamu atau yg megang2 kamu jauh2 yaaa jangan di deketin akuu gaa mau cewekku di pegang cowo lainn🙁🙁 kalau mau main yg ada cowonya kasih tau yaa sayangg biar aku tau dan gaa mikir aneh2 okeyy sayangg akuu orangnya cemburuan loh sayangg cuma aku cemburuan yaa gitu gaa keliatan tapi aslinya aku cemburu bangett hahahaha, begitupun aku juga akan selalu terus ngabarin kamu dimana pun aku berada karna akuu ga mau cewekku mikir aneh2, pokoknya sebisa mungkin kabarin aku terus yaa sayangg di waktu kamu sibuk okeeyy sayangg💕💕, nanti terima yaa hadiah aku yg simple nantii yaaa sayanggg, akuu sekali lagi mau bilang terima kasih banyakk kamu udah milih aku sebagai cowo kamuu, AKUU SAYANGGG KAMUUUU🫶🏻🫶🏻, I LOVEE YOUU SAYANGGKUU CANTIKKKUU DUNIAKUUU🤍🤍🤍
+    </p>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const card = document.getElementById('card');
+    const success = document.getElementById('success');
+    const loveMessage = document.getElementById('loveMessage');
+
+    // Tombol No kabur
+    noBtn.addEventListener('mouseover', () => {
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 50);
+      noBtn.style.left = x + 'px';
+      noBtn.style.top = y + 'px';
+    });
+
+    // Klik Yes
+    yesBtn.addEventListener('click', () => {
+      card.classList.add('hidden');
+      success.classList.remove('hidden');
+      createHearts();
+
+      setTimeout(() => {
+        success.classList.add('hidden');
+        loveMessage.classList.remove('hidden');
+      }, 2500);
+    });
+
+    function createHearts() {
+      setInterval(() => {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.innerText = '❤️';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.fontSize = Math.random() * 20 + 20 + 'px';
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 4000);
+      }, 300);
+    }
+  </script>
+
+</body>
+</html>
